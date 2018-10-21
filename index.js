@@ -37,8 +37,6 @@ let idFooter = document.getElementById("idFooter");
 let idVersion = document.getElementById("idVersion");
 let idIP = document.getElementById("idIP");
 
-//let newItem = '<li class="list-group-item"></li>';
-
 function createItem(Title,Text="",isUrl = false){
     li = document.createElement("li");
     li.classList.add("list-group-item");
@@ -204,29 +202,22 @@ btnConnect.onclick = function(e) {
   }
 
   btnOK.onclick = function(e){
-    //e.preventDefault();
     myDefsToControls(false)
     ipc.send('updateDefs',myDefs)
     showDefs(false);
-    //console.log('ok');
     return false;
 
   }
 
   btnCancel.onclick = function(e){
-    //e.preventDefault();
     myDefsToControls(true);    
     showDefs(false);
-    //console.log('Cancel')
     return false;
   }
 
   window.onload = function () {
-    //ipc.send('connect');
-    //changeConnectButton(false);
     myDefsForm.hidden = true;
     ipc.send('PageTotalyLoaded');
-    //console.log("Page Loaded");
 }
 
 
