@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Share Me To Something Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/photon.min.css" />
+    <style>
+        .titlebar {
+            -webkit-user-select: none;
+            -webkit-app-region: drag;
+        }
+
+        .titlebar-button {
+            -webkit-app-region: no-drag;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    
+    <div class="window">
+
+        <header class="toolbar toolbar-header">
+            
+            
+            <div class="toolbar-actions">
+
+                <div class="btn-group">
+                    <button id="btnConnect" class="btn btn-positive">
+                        <span class="icon icon-network icon-text"></span>
+                        <span id="txtConnect">Conectar</span>
+                    </button>
+
+                </div>
+                
+                
+                <div class="pull-right"> 
+                        <div class="btn-group">
+                        <button id="btnDefs" title="Definições..." class="btn btn-default pull-right">
+                                <span class="icon icon-cog"></span>
+                            </button>
+                            <button id="btnTray" title="Minimizar para a Tray" class="btn btn-default">
+                                    <span style="color:silver;font-weight: bolder">_</span>
+                                </button>
+                        <button id="btnMinimize" title="Minimizar" class="btn btn-default">
+                           <span class="icon icon-minus"></span>
+                       </button>
+                       <button id="btnMaximize" title="Maximizar" class="btn btn-default">
+                           <span id="spanMaximize" class="icon icon-resize-full"></span>
+                       </button>
+                       <button id="btnClose" title="Fechar" class="btn btn-default">
+                           <span class="icon icon-cancel"></span>
+                       </button>
+                       </div>
+                   </div>
+                
+            </div>
+        </header>
+        <div id="windowContent" class="window-content" style="width:100%">
+                <div class="padded-more">
+                        <div id="divStatus"></div>
+                        <ul id="logger" class="list-group">                         
+                                
+                        
+                        </ul>
+                        <form id="myDefsForm" style="margin: 0 auto; width: 60%;">
+                                <div class="form-group">
+                                  <label>Porta</label>
+                                  <input id="myDefsPorta" type="porta" class="form-control" placeholder="Porta">
+                                </div>
+                                <div class="form-group">
+                                    <label>Browser</label>
+                                    <input id="myDefsBrowser" type="browser" class="form-control" placeholder="browser">
+                                </div>
+                                <div class="checkbox">
+                                        <label>
+                                          <input id="myDefsAutoOn" type="checkbox"> Ligar Servidor automaticamente ao iniciar
+                                        </label>
+                                      </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="myDefsTray" type="checkbox"> Iniciar minimizado na tray
+                                    </label>
+                                </div>
+                               
+                                <div class="form-actions">
+                                  <button id="btnCancel"  class="btn btn-form btn-default">Cancel</button>
+                                  <button id="btnOK"  class="btn btn-form btn-primary">OK</button>
+                                </div>
+                              </form>
+                </div>
+        </div>
+        
+        
+        <footer class="toolbar toolbar-footer">
+            <h1 id="idFooter" class="title">ShareMeToSomething Server V <span id="idVersion">0.0.0</span> IP : <span id="idIP">127.0.0.0</span></h1>
+        </footer>
+    </div>    
+    <script src="index.js"></script>
+</body>
+</html>
