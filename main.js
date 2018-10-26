@@ -8,10 +8,28 @@ const path = require('path')
 const DEBUGMODE = 0
 //ELECTRON_ENABLE_LOGGING=1
 
+// TODO : 
+// verificar a quanto tempo e que foi lancado o ultimo link
+// serve para evitar que o servidor bloquie por excesso de pedidos de aberturas
+
+
 let win
 let serverHandle
 let appIcon = null
 let ServerStatus =  sStatus.Stopped
+let lastShare = 0
+let TimeTilNextShare = 5000 //ms (5s)
+
+w();
+function canOpen(){
+  if (Date.now() - lastShare > TimeTilNextShare){
+    lastShare = Date.now();
+    return true;
+  }else{
+    return false;
+  }
+}
+
 
 myconfig.getDefs();
 
@@ -176,13 +194,20 @@ function StartServer(){
     exp.get('/shared', (req, res) => { 
         var url = req.query.url;      
         
-        res.status(200).send('OK')
-        url = sanitizeUrl(url);
-        
-        if (url !== 'about:blank'){
-          childApp = myfuncs.openApp(myconfig.defs.Browser,url);
-          ipcSend('receivedUrl', {"type": "shared", "data":{"from" : req.ip, "msg":url}});
-          
+		if (canOpen()){
+	        //śres.status(200).send('OK')
+    	    url = sanitizeUrl(url);
+        	if (url !== 'about:blank' ){
+          		childApp = myfuncs.openApp(myconfig.defs.Browser,url);
+          		ipcSend('receivedUrl', {"type": "shared", "data":{"from" : req.ip, "msg":url}});
+          		res.status(200).send('OK');
+        	}else{
+        	//400 Bad Request
+        		res.status(400).send('Invalid URL ERROR');
+        	}
+        }else{
+        //429 Too Many Requests (RFC 6585)
+        	res.status(429).send('Share Interval Error');      
         }  
       })
   }
