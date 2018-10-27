@@ -5,7 +5,7 @@ const myconfig = require("./myconfig.js")
 const myfuncs = require("./funcoes.js")
 const sanitizeUrl = require('@braintree/sanitize-url').sanitizeUrl;
 const path = require('path')
-const DEBUGMODE = 0
+const DEBUGMODE = 1
 //ELECTRON_ENABLE_LOGGING=1
 
 // TODO : 
@@ -20,7 +20,7 @@ let ServerStatus =  sStatus.Stopped
 let lastShare = 0
 let TimeTilNextShare = 5000 //ms (5s)
 
-w();
+//w();
 function canOpen(){
   if (Date.now() - lastShare > TimeTilNextShare){
     lastShare = Date.now();
@@ -38,7 +38,8 @@ function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({ width: 800, height: 600 , frame: false,icon: __dirname + '/icon.png'}) 
   
-    win.loadFile('file://' + __dirname +'/index.html')
+    //win.loadFile('file://' + __dirname +'/index.html')
+    win.loadFile('./index.html');
 
     if(DEBUGMODE){
       win.webContents.openDevTools()   
